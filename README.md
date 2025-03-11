@@ -1,8 +1,4 @@
 # Alma_Assignment
-Here’s an **expanded** breakdown of every step in the **O-1A Eligibility Assessment Pipeline** for the README:  
-
----
-
 # **📌 Process Overview**  
 
 This project automates **CV processing** to assess a candidate’s **O-1A visa eligibility** using **FastAPI, OCR, and LLMs (Gemini API)**. It extracts relevant information, evaluates qualifications, and provides a structured **JSON output**.  
@@ -47,11 +43,11 @@ Files: ["John_Doe_CV.pdf", "Jane_Smith_CV.pdf"]
 ### **3️⃣ Chunking & Preprocessing**  
 📦 **What Happens?**  
 - The extracted CV text is **split into smaller chunks** (to fit within LLM token limits).  
-- Each chunk is **sent separately** to the **Gemini API** for processing.  
+- Each chunk is **sent separately** to the **Gemini API (because I needed a free LLM api)** for processing.  
 
 📌 **Key Components:**  
 - `textwrap.wrap()` (splits text into **3000-character chunks**).  
-- **Sleep timers** are used to avoid rate limits.  
+- **Sleep timers** are used to avoid rate limits. That is why you see a quite slow inference (it is deliberate). I am spending time instead of money.  
 
 ---
 
@@ -61,7 +57,7 @@ Files: ["John_Doe_CV.pdf", "Jane_Smith_CV.pdf"]
 - The model extracts **achievements** that match **O-1A visa criteria**.  
 
 📌 **Key Components:**  
-- `_call_gemini_for_cv_info_extraction()` sends prompts to Gemini.  
+- `_call_gemini_for_cv_info_extraction()` sends prompts to Gemini.  Look at the following file \ResumeGPT\Engineered_Prompt\Extraction_prompt.txt.
 - **8 O-1A criteria** (awards, publications, judging, contributions, memberships, leadership, salary, media).  
 
 📜 **Example Output:**  
@@ -76,7 +72,7 @@ Files: ["John_Doe_CV.pdf", "Jane_Smith_CV.pdf"]
 
 ### **5️⃣ O-1A Evaluation**  
 📊 **What Happens?**  
-- The extracted info is **re-analyzed** by the **Gemini API** using a refined **O-1A evaluation prompt**.  
+- The extracted info is **re-analyzed** by the **Gemini API** using a refined **O-1A evaluation prompt** (see ResumeGPT\Engineered_Prompt\alma_prompt.txt).  
 - It determines **how many criteria the candidate meets**.  
 
 📌 **Key Components:**  
@@ -84,18 +80,20 @@ Files: ["John_Doe_CV.pdf", "Jane_Smith_CV.pdf"]
 - Outputs **detailed reasoning** on how many **criteria** are satisfied.  
 
 📝 **Example Output:**  
-```json
-{
-  "Met_Criteria": ["Published Research", "Awards", "Judging"],
-  "Criteria_Count": 3
-}
+- Secured All India Rank 1373 in JEE Advanced among 150,000 students [’20]
+- Awarded a Change of Branch to Electrical Engineering among 24 students due to outstanding academics [’22]
+- Stood 2nd place school-wide in the badminton competition at Sri Chaitanya School [’16]
+- Published Research Papers & Articles: Reconstruction from Samples at Unknown Locations with Application to 2D Unknown View Tomography - Elsevier Signal Processing
+- Developed gradient descent based tomographic reconstruction algorithms using von Mises distributions and a PMF model for improved 2D accuracy.
+- Implemented Wiener filter-based PCA and eigenvector decomposition for denoising.
+
 ```
 
 ---
 
 ### **6️⃣ Final Classification (Low/Medium/High)**  
 🏅 **What Happens?**  
-- A **final LLM call** classifies eligibility as `"low"`, `"medium"`, or `"high"`.  
+- A **final LLM call** classifies eligibility as `"low"`, `"medium"`, or `"high"`. I understand from the documentation that we need just 3 criteria satisfied, but since there is a heavy use of LLMs this classification needs to be a little more harsh.  
 - Rules:  
   - **3 or fewer criteria** → `"low"`  
   - **4 or 5 criteria** → `"medium"`  
