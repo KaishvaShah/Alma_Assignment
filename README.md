@@ -164,6 +164,3 @@ Files: ["John_Doe_CV.pdf", "Jane_Smith_CV.pdf"]
 | API Output             | FastAPI (JSON response) |
 
 ---
-
-Does this **expanded breakdown** work for your README? 🚀 Let me know if you'd like **additional sections** (e.g., **installation, setup, running commands**).
-
