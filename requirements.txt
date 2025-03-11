@@ -23,3 +23,18 @@ typing_extensions==4.5.0
 tzdata==2023.3
 urllib3==2.0.2
 yarl==1.9.2
+
+# Additional dependencies for FastAPI
+fastapi==0.100.0
+uvicorn==0.22.0
+
+# For file handling (if needed)
+python-multipart==0.0.6
+
+# OCR processing (if required)
+pytesseract==0.3.10
+pdf2image==1.16.3
+Pillow==10.0.0
+
+# Google Gemini API (if using Google AI models)
+google-generativeai==0.3.0
