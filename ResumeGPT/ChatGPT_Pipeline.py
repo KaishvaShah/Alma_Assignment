@@ -2,11 +2,21 @@
 import os
 import pandas as pd
 import openai
-from openai import InvalidRequestError
+# from openai import InvalidRequestError
 import time
 import json
 from json import JSONDecodeError
 from tqdm import tqdm
+import textwrap
+# from google.api_core import retry
+# from google.generativeai.types import RequestOptions
+
+# import google.generativeai as genai
+# from google import genai
+import google.generativeai as genai
+from openai import OpenAI
+# Initialize the Llama API client
+# client = OpenAI(base_url="http://10.185.151.234:1234/v1", api_key="lm-studio")
 # add a progress bar to pandas operations
 tqdm.pandas(desc='CVs')
 
@@ -20,18 +30,29 @@ output_excel_file_path = '../Output/CVs_Info_Extracted.xlsx'
 # define a class to extract CV information
 class CVsInfoExtractor:
     # define a constructor that initializes the class with a DataFrame of CVs
-    def __init__(self, cvs_df, openai_api_key, desired_positions):
+    def __init__(self, cvs_df, openai_api_key):
+        # Initialize Gemini API (Ensure API key is set up before calling this)
+        genai.configure(api_key=openai_api_key)  # Replace with your actual API key
+        # self.client = genai.Client(api_key = openai_api_key)
         self.cvs_df = cvs_df
         
         # open a file in read mode and read the contents of the file into a variable
-        with open('../Engineered_Prompt/Prompt.txt', 'r') as file:
+        with open('../Engineered_Prompt/alma_prompt.txt', 'r') as file:
             self.prompt = file.read()
         
+        # open a file in read mode and read the contents of the file into a variable
+        with open('../Engineered_Prompt/Extraction_prompt.txt', 'r') as file:
+            self.extraction_prompt = file.read()
+        
+        # open a file in read mode and read the contents of the file into a variable
+        with open('../Engineered_Prompt/o1a_classification_prompt.txt', 'r') as file:
+            self.classification_prompt = file.read()
+        
         # Join the desired positions into a comma-separated string
-        suitable_positions_str = "(" + ", ".join(desired_positions) + ")"
+        # suitable_positions_str = "(" + ", ".join(desired_positions) + ")"
 
         # Replace the placeholder in the prompt with the formatted suitable positions string
-        self.prompt = self.prompt.replace('(suitable position for the candidate)', suitable_positions_str)
+        # self.prompt = self.prompt.replace('(suitable position for the candidate)', suitable_positions_str)
         
         
         # set the OpenAI API key
@@ -39,33 +60,64 @@ class CVsInfoExtractor:
 
 
     # define internal function to call GPT for CV info extraction
-    def _call_gpt_for_cv_info_extraction(self, prompt, cv_content, model, temperature = 0):
-
-        # create a dict of parameters for the ChatCompletion API
+    # Define internal function to call GPT for CV info extraction
+    def _call_gpt_for_cv_info_extraction(self, prompt, cv_content, model, temperature=0):
+        # print(cv_content)
+        # Create a dict of parameters for the ChatCompletion API
         completion_params = {
             'model': model,
-            'messages': [{"role": "system", "content": prompt},
-                        {"role": "user", "content": cv_content}],
-            'temperature': temperature}
+            'messages': [
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": cv_content}
+            ],
+            'temperature': temperature
+        }
 
-        # send a request to the ChatCompletion API and store the response
-        response = openai.ChatCompletion.create(**completion_params)
-        # if the response contains choices and at least one choice, extract the message content
-        if 'choices' in response and len(response.choices) > 0:
-            cleaned_response = response['choices'][0]['message']['content']
+        # Send a request to the ChatCompletion API and store the response
+        response = client.chat.completions.create(**completion_params)
+
+        # If the response contains choices and at least one choice, extract the message content
+        if response.choices and len(response.choices) > 0:
+            cleaned_response = response.choices[0].message.content
+            print(cleaned_response)
             try:
-                # try to convert the message content to a JSON object
+                # Try to convert the message content to a JSON object
                 json_response = json.loads(cleaned_response)
-            except JSONDecodeError:
-                # if the conversion fails, set the JSON response to None
+            except json.JSONDecodeError:
+                # If the conversion fails, set the JSON response to None
                 json_response = None  
         else:
-            # if the response does not contain choices or no choice, set the JSON response to None
+            # If the response does not contain choices or no choice, set the JSON response to None
             json_response = None
-            
-        # return the JSON response
+
+        # Return the JSON response
         return json_response
     
+
+
+    def _call_gemini_for_cv_info_extraction(self, prompt, cv_content, model="gemini-2.0-pro-exp", temperature=0):
+        try:
+            model = genai.GenerativeModel('models/' + model)
+            # Create a request to the Gemini model
+            response = model.generate_content(
+                contents=[
+                    {"role": "user", "parts": [{"text": prompt}]},
+                    {"role": "user", "parts": [{"text": cv_content}]}
+                ],
+                generation_config={"temperature": temperature})
+        #     request_options=RequestOptions(
+        # retry=retry.Retry(initial=1, multiplier=1, maximum=60))
+            # Extract response text
+            cleaned_response = response.text if response.text else ""
+            print(cleaned_response)  # Debugging
+
+            return cleaned_response  # Gemini doesn't return JSON by default, so returning plain text
+
+        except Exception as e:
+            print(f"Error in Gemini API call: {str(e)}")
+            return None
+
+
     
     # Defines internal function to normalize a JSON response from GPT
     def _normalize_gpt_json_response(self, CV_Filename, json_response):
@@ -97,55 +149,92 @@ class CVsInfoExtractor:
             # If the file doesn't exist, write the DataFrame into a new CSV file
             df.to_csv(output_csv_file_path, mode='w', index=False)
 
-
-    # Define the internal function _gpt_pipeline
-    def _gpt_pipeline(self, row, model = 'gpt-3.5-turbo'):
-
-        # Retrieve the CV Filename and Content from the given row
+    def _gemini_pipeline(self, row):
+        # Retrieve the CV Filename and Content
         CV_Filename = row['CV_Filename']
         CV_Content = row['CV_Content']
 
-        # Sleep for 5 seconds to delay the next operation
-        time.sleep(5)
-        
-        try:
-            # Print status message indicating GPT is being called for CV info extraction
-            print('Calling GPT For CV Info Extraction...')
+        print(f"Processing CV in chunks for {CV_Filename}...")
 
-            # Call the GPT model for CV information extraction
-            json_response = self._call_gpt_for_cv_info_extraction(prompt=self.prompt, cv_content=CV_Content, model=model)
+        # Break CV content into smaller parts
+        chunk_size = 3000  # Adjust based on token limits
+        chunks = textwrap.wrap(CV_Content, width=chunk_size, break_long_words=False, break_on_hyphens=False)
 
-            # Print status message indicating normalization of GPT response
-            print('Normalizing GPT Response...')
+        extracted_info = ""  # Store cumulative extracted information
 
-            # Normalize the GPT JSON response
-            df = self._normalize_gpt_json_response(CV_Filename, json_response)
+        for i, chunk in enumerate(chunks):
+            print(f"Processing chunk {i+1}/{len(chunks)} for {CV_Filename}...")
 
-            # Print status message indicating that the results are being appended to the CSV file
-            print('Appending Results To The CSV File...')
+            # Sleep to avoid API rate limits
+            time.sleep(30)
 
-            # Write the normalized response to a file
-            self._write_response_to_file(df)
-            
-            # Print a line for clarity in the output
-            print('----------------------------------------------')
+            # Call GPT for extracting structured information from each chunk
+            response = self._call_gemini_for_cv_info_extraction(
+                prompt=self.extraction_prompt,
+                cv_content=chunk,
+            )
 
-            # Return the GPT JSON response
-            return json_response
+            print(f"Chunk {i+1} Response:\n{response}\n")  # Debugging: Print response
 
-        # Catch an exception when the tokens don't fit in the chosen GPT model
-        except InvalidRequestError as e:
-            # Print the error that occurred
-            print('An Error Occurred:', str(e))
+            # Accumulate extracted information
+            extracted_info += response + "\n"
 
-            # Print status message indicating that gpt-4 is being called instead
-            print("Tokens don't fit gpt-3.5-turbo, calling gpt-4...")
+        # Save extracted information to a text file
+        output_directory = "extracted_info"
+        os.makedirs(output_directory, exist_ok=True)
+        extracted_info_path = os.path.join(output_directory, f"{CV_Filename}_extracted.txt")
 
-            # Retry the pipeline with the gpt-4 model
-            return self._gpt_pipeline(row, model = 'gpt-4')
+        with open(extracted_info_path, "w", encoding="utf-8") as file:
+            file.write(extracted_info)
 
+        print(f"Extracted information saved to: {extracted_info_path}")
 
-    # Define the internal function _write_final_results_to_excel
+        # Sleep to avoid API rate limits
+        time.sleep(60)
+        # Pass extracted information through O-1A assessment
+        print(f"Assessing O-1A qualifications for {CV_Filename}...")
+
+        o1a_response = self._call_gemini_for_cv_info_extraction(
+            prompt=self.prompt,  # This is the refined O-1A prompt
+            cv_content=extracted_info,
+        )
+
+        # Save O-1A assessment results to a text file
+        CV_Filename_without_extn = os.path.splitext(row['CV_Filename'])[0]  # Remove .pdf extension
+        o1a_info_path = os.path.join(output_directory, f"{CV_Filename_without_extn}_O1A_assessment.txt")
+
+        with open(o1a_info_path, "w", encoding="utf-8") as file:
+            file.write(o1a_response)
+
+        print(f"O-1A assessment saved to: {o1a_info_path}")
+
+        # return o1a_response  # Return the final O-1A assessment    # Define the internal function _write_final_results_to_excel
+        # Sleep before final classification call
+        time.sleep(30)
+
+        # Final classification for low/medium/high
+        print(f"Classifying O-1A eligibility for {CV_Filename}...")
+
+        final_classification = self._call_gemini_for_cv_info_extraction(
+            prompt=self.classification_prompt,  # Uses the final classification prompt
+            cv_content=o1a_response,
+        )
+
+        # Save final classification result
+        classification_info_path = os.path.join(output_directory, f"{CV_Filename_without_extn}_O1A_classification.txt")
+
+        with open(classification_info_path, "w", encoding="utf-8") as file:
+            file.write(final_classification.strip())  # Ensure it's a one-word response
+
+        print(f"Final classification saved to: {classification_info_path}")
+
+        # return o1a_response, final_classification.strip()  # Return the final classification result
+        return {
+            "CV_Filename": CV_Filename,
+            "Extracted_Info": json.dumps(extracted_info.strip(), indent=2, ensure_ascii=False),
+            "O1A_Response": json.dumps(o1a_response.strip(), indent=2, ensure_ascii=False),
+            "Final_Classification": final_classification.strip()
+        }
     def _write_final_results_to_excel(self):
         # Load the CSV file into a pandas DataFrame
         df_to_excel = pd.read_csv(output_csv_file_path)
@@ -156,24 +245,13 @@ class CVsInfoExtractor:
         # Return the DataFrame
         return df_to_excel
 
-
-    # Define the main function extract_cv_info
     def extract_cv_info(self):
-        # Print a status message indicating the start of the ResumeGPT Pipeline
-        print('---- Excecuting ResumeGPT Pipeline ----')
+        print('---- Executing ResumeGPT Pipeline ----')
         print('----------------------------------------------')
 
-        # Apply the _gpt_pipeline function to each row in cvs_df DataFrame
-        self.cvs_df['CV_Info_Json'] = self.cvs_df.progress_apply(self._gpt_pipeline, axis=1)
+        results = self.cvs_df.progress_apply(self._gemini_pipeline, axis=1)
 
-        # Print a status message indicating the completion of the extraction
         print('Extraction Completed!')
 
-        # Print a status message indicating that results are being saved to Excel
-        print('Saving Results to Excel...')
+        return results.to_list()  # Return results as a list of dictionaries
 
-        # Write the final results to an Excel file
-        final_df = self._write_final_results_to_excel()
-
-        # Return the final DataFrame
-        return final_df
