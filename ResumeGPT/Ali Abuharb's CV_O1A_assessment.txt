@@ -1,0 +1,11 @@
+- Won First place in Smart Transactions Track – KFUPM FinTech Regional Hackathon (2019).
+- Won Second place in Data Science Track - MIT Health Hackathon (2018).
+- Participated in the Data Quality Scientific Paper.
+- Worked on various NLP projects that include text cleansing, text preprocessing, text classification, NER, text matching, text similarity, language models, and participated in developing NLP Framework.
+- Worked in Images Data projects that include image classification, image segmentation, object detection, image preprocessing, and created a Medical Computer Vision Framework.
+- Built a complex rule based DRG Engine that has hundreds of rules to assign and unify prices of procedures in the Saudi health sector using Alteryx for DRG version 1 and rebuild it using Python DRG version 2.
+- Built Data Detection Engine for Semantic Data Type Detection with AI & NLP using Alteryx and Python.
+- Led Resources like data engineers, ML engineers, data analysts, developers, and business analysts on many Data Projects.
+- Sr. Machine Learning Engineer - Lean, Advanced Analytics Department.
+- Data Science Influencer - LinkedIn (2018 -Present).
+- Speaker, “Automating Data Quality Metrics” - SIPHA Scientific Conference (2021).

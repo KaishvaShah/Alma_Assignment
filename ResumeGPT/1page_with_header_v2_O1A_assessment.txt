@@ -1,0 +1,6 @@
+- Secured All India Rank 1373 in JEE Advanced among 150,000 students [’20]
+- Awarded a Change of Branch to Electrical Engineering among 24 students due to outstanding academics [’22]
+- Stood 2nd place school-wide in the badminton competition at Sri Chaitanya School [’16]
+- Published Research Papers & Articles: Reconstruction from Samples at Unknown Locations with Application to 2D Unknown View Tomography - Elsevier Signal Processing
+- Developed gradient descent based tomographic reconstruction algorithms using von Mises distributions and a PMF model for improved 2D accuracy.
+- Implemented Wiener filter-based PCA and eigenvector decomposition for denoising.

@@ -1,0 +1,49 @@
+#### **Awards & Recognition**
+- **Prestigious Awards & Honors:**
+  1. Secured All India Rank 1373 in JEE Advanced among 150,000 students [’20]
+  2. Awarded a Change of Branch to Electrical Engineering among 24 students due to outstanding academics [’22]
+  3. Selected as a candidate for the M.Tech. Interdisciplinary Dual Degree at C-MInDS [’23]
+
+---
+
+#### **Publications & Media**
+- **Published Research Papers & Articles:**
+  1. Reconstruction from Samples at Unknown Locations with Application to 2D Unknown View Tomography - Elsevier Signal Processing
+
+---
+
+#### **Work Experience**
+- **Total Years of Experience:** [0 years]
+- **Companies Worked At:** [Qualcomm]
+- **Top 5 Responsibilities/Projects:**
+  1. Engineered a tailored logging system to track coefficient adjustments, optimizing filter responses and performance
+  2. Developed a Perl script for advanced debugging, calling a Python script for data analysis and reporting
+  3. implemented a data logging system using interrupts and signals for monitoring performance across 8 critical process types
+  4. Developed gradient descent based tomographic reconstruction algorithms using von Mises distributions and a PMF model for improved 2D accuracy.
+  5. Implemented Wiener filter-based PCA and eigenvector decomposition for denoising.
+
+#### **Education**  
+**Bachelor's Degree:**  
+- **University:** Indian Institute of Technology Bombay  
+- **GPA:** 9.3  
+- **Major:** Electrical Engineering  
+- **Graduation Date:** 2025
+
+**Master's Degree:**  
+- **University:** Indian Institute of Technology Bombay  
+- **Major:** Machine Intelligence and Data Science
+- **Graduation Date:** 2025
+
+---  
+
+#### **Work Experience**
+- **Top 5 Responsibilities/Projects:**  
+  1. Implemented an MDP solver using linear and dynamic programming to derive optimal value functions and policies  
+  2. Formulated MDPs for real-world scenarios like football, using reward structures to model system dynamics
+
+---
+
+#### **Awards & Recognition**  
+- **Prestigious Awards & Honors:**  
+  1. Stood 2nd place school-wide in the badminton competition at Sri Chaitanya School [’16]
+

@@ -1,0 +1,63 @@
+#### **Education**
+
+**Bachelor's Degree:**
+- **University:** Indian Institute of Technology, Bombay
+- **GPA:** 9.4
+- **Major:** Electrical Engineering
+- **Graduation Date:** Present
+
+**Master's Degree:**
+- **University:** Indian Institute of Technology, Bombay
+- **Major:** AI and DS
+- **Graduation Date:** Present
+
+---
+
+#### **Publications & Media**
+
+- **Published Research Papers & Articles:**
+  1. Two-Dimensional Unknown View Tomography from Unknown Angle Distributions - International Conference on Acoustics, Speech, and Signal Processing, 2025
+  2. Reconstruction from Samples at Unknown Locations with Application to 2D Unknown View Tomography - Elsevier Signal Processing, 2025
+
+---
+
+#### **Work Experience**
+- **Top 5 Responsibilities/Projects:**
+  1.  MDP Formulation and planning
+  2.  3D Reconstruction in CryoEm
+  3.  Text to Knowledge Graph
+  4.  Frame Prediction using CNN-LSTM and Autoencoders
+  5.  Gaussian HMMs for Speech Recognition
+
+#### **Work Experience**
+- **Total Years of Experience:** [0 years]
+- **Companies Worked At:** [Qualcomm]
+- **Top 5 Responsibilities/Projects:**
+  1. [Engineered a logging system to track coefficient adjustments for filter responses and enhancing system performance]
+  2. [Developed a Python script andPerl script for extracting and processing critical data for advanced debugging]
+  3. [Implemented a data logging system using interrupts andsignals to monitor performance across 8 process types]
+  4. [Researched WebRTC protocols and signalling servers, integrating these technologies to support real-time data exchange]
+  5. [Developed dynamic web applications with Node.js andReact , facilitating the peer-to-peer file transfer system]
+
+---
+
+#### **Awards & Recognition**
+- **Prestigious Awards & Honors:**
+  1. [Secured All India Rank 1373 inJEE Advanced among 250,000 students 2020]
+  2. [Awarded a Change of Branch to Electrical Engineering among 24 students due to outstanding academics 2022]
+  3. [Obtained 99.72 percentile inJEE Main among 1.6 million aspirants 2020]
+  4. [Recipient of Kishor Vaigyanic Protsahan Yojana (KVPY) scholarship (AIR 1444) 2020]
+  5. [Stood 2nd place school-wide in the badminton competition at Sri Chaitanya School 2016]
+
+---
+
+#### **Publications & Media**
+- **Major Media Mentions:**
+  1. [Electron Microscope Society of India] - [Conference]
+
+---
+
+#### **Leadership & Key Roles**
+- **Leadership Positions:**
+  1. [Teaching Assistant] - [IITB]
+

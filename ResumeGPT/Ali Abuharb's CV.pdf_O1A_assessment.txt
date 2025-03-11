@@ -1,0 +1,5 @@
+- Led data engineers, ML engineers, data analysts, developers, and business analysts on multiple data projects.
+- Developed a DRG Engine with hundreds of rules for the Saudi health sector, first using Alteryx and then Python.
+- Built a Data Detection Engine for Semantic Data Type Detection using AI and NLP with Alteryx and Python.
+- Developed a Data Quality Engine to assess internal company data quality using T-SQL.
+- Conducted and reported a full Website Customer Behavior Analysis.

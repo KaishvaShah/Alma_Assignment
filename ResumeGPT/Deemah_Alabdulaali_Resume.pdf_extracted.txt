@@ -1,0 +1,39 @@
+#### **Education**
+**Bachelor's Degree:**
+- **University:** King Saud University - Riyadh
+- **GPA:** 4.99/5.00
+- **Major:** Computer Sciences : Information Systems
+- **Graduation Date:** December, 2018
+
+#### **Work Experience**
+- **Total Years of Experience:** 5 years
+- **Companies Worked At:** Lean Business Services, Confidential
+- **Top 5 Responsibilities/Projects:**
+  1. Managing a team of 6 data scientists and machine learning engineers.
+  2. Leading and planning +5 data and machine learning projects from an initial idea to deployment.
+  3. Designed and developed +5 machine learning models.
+  4. Designed and implemented automated data pipelines.
+  5. Developed and deployed 2 frontend projects for a unified platform.
+
+#### **Employment & Personal Details**
+- **Current Residence:** Riyadh
+- **Nationality:** Saudi Arabia
+
+#### **Work Experience**
+- **Top 5 Responsibilities/Projects:**
+  1.  Investigated and fixed multiple issues in third party systems.
+  2.  Automated training of ML projects on Shaheen super computer.
+  3.  Worked on a customized NLP framework in Arabic and English that is used for all NLP projects.
+  4.  Worked on automating NLP based reports based on the business need.
+  5.  Worked on +3 entity recognition projects (technical role & lead role) from manual labeling to model development and automation.
+
+#### **Awards & Recognition**
+- **Prestigious Awards & Honors:**
+  1.  Ranked 1st out of graduated students with first class honors.
+  2.  Scored 95 in Qiyas.
+  3.  Passed the national stage and was qualified for the international stage in Mawhiba Physics Olympiad.
+
+#### **Publications & Media**
+- **Published Research Papers & Articles:**
+  1.  Participated in the methodology and the published paper that describes the use of ML to predict the readmission of patients.
+

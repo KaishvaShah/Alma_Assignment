@@ -1,0 +1,70 @@
+#### **Education**
+**Bachelor's Degree:**
+- **University:** King Fahd University of Petroleum & Minerals
+- **GPA:** 3.03/4
+- **Major:** Management Information Systems
+- **Graduation Date:** May 2020
+
+#### **Work Experience**
+- **Total Years of Experience:** 3 years
+- **Companies Worked At:** Lean, Ministry of Interior
+- **Top 5 Responsibilities/Projects:**
+  1. Led Resources like data engineers, ML engineers, data analysts, developers, and business analysts on many Data Projects
+  2. Worked on various NLP projects that include text cleansing, text preprocessing, text classification, NER, text matching, text similarity, language models, and participated in developing NLP Framework
+  3. Worked in Images Data projects that include image classification, image segmentation, object detection, image preprocessing, and created a Medical Computer Vision Framework
+  4. Built a complex rule based DRG Engine that has hundreds of rules to assign and unify prices of procedures in the Saudi health sector using Alteryx for DRG version 1 and rebuild it using Python DRG version 2
+  5. Built Data Detection Engine for Semantic Data Type Detection with AI & NLP using Alteryx and Python
+
+#### **Publications & Media**
+- **Published Research Papers & Articles:**
+  1. Participated in the Data Quality Scientific Paper
+
+#### **Leadership & Key Roles**
+- **Leadership Positions:**
+  1. Sr. Machine Learning Engineer - Lean, Advanced Analytics Department
+
+#### **Employment & Personal Details**
+- **Current Residence:** Riyadh, Saudi Arabia
+
+#### **Work Experience**
+- **Companies Worked At:** [Lean, KFUPM Coop Program]
+- **Top 5 Responsibilities/Projects:**
+  1.  Generated many data flows, reports, and dashboards for Covid -19 projects using SQL and PowerBi
+  2.  Developed a Data Quality Engine that assesses the quality of the internal company data using T-SQL
+  3.  Studied and reported a full Website Customer Behavior Analysis
+  4.  Worked on different data science related tasks from Data Gathering, Cleansing, Modeling, To Data Visualizing and Dashboarding
+
+---
+
+#### **Awards & Recognition**
+- **Prestigious Awards & Honors:**
+  1.  Won the First place in Smart Transactions Track – KFUPM FinTech Regional Hackathon (2019)
+  2.  Won the Second place in Data Science Track - MIT Health Hackathon (2018)
+
+- **Memberships in Elite Organizations:**
+  1.  Member – Riyadh and khobar PyData Community (2020)
+  2.  Member – Saudi Data Community (2019)
+
+---
+
+#### **Leadership & Key Roles**
+- **Leadership Positions:**
+  1.  Data Science Influencer - LinkedIn (2018 -Present)
+  2.  Speaker, “Automating Data Quality Metrics” - SIPHA Scientific Conference (2021)
+
+#### **Education**
+
+#### **Work Experience**
+
+#### **Awards & Recognition**
+
+#### **Publications & Media**
+
+#### **Judging & Reviewing Roles**
+
+#### **Original Contributions & Innovations**
+
+#### **Leadership & Key Roles**
+
+#### **Employment & Personal Details**
+
