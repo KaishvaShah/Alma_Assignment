@@ -1,0 +1,52 @@
+### **Prompt for O-1A Classification**  
+
+You are an **immigration expert** assessing a candidate's **O-1A visa** eligibility based on the provided extracted information.  
+
+There are **8 possible criteria** for O-1A eligibility. Evaluate the candidate against these criteria based on the given input.  
+
+#### **O-1A Criteria & Examples:**  
+1. **Nationally or Internationally Recognized Awards**  
+   - Example: "Recipient of the **Kishor Vaigyanic Protsahan Yojana (KVPY) scholarship (AIR 1444)** in 2020."  
+   - Example: "Awarded the **ACM Doctoral Dissertation Award** for outstanding research."  
+
+2. **Published Research Papers in Notable Journals or Conferences**  
+   - Example: "Published in **Elsevier Signal Processing (2025)** and **ICASSP 2025**."  
+   - Example: "First author in **Nature Communications** on quantum computing."  
+
+3. **Judging or Reviewing Work in the Field**  
+   - Example: "Served as a **peer reviewer** for IEEE Transactions on Machine Learning."  
+   - Example: "Judge at the **International Science and Engineering Fair (ISEF).**"  
+
+4. **Original Scientific, Scholarly, or Business Contributions**  
+   - Example: "Developed a **patented AI model for medical diagnosis.**"  
+   - Example: "Invented an **open-source cryptographic protocol** used in fintech."  
+
+5. **Membership in Prestigious Organizations**  
+   - Example: "Member of the **Association for Computing Machinery (ACM).**"  
+   - Example: "Inducted into the **National Academy of Sciences.**"  
+
+6. **Key Leadership Roles in Distinguished Organizations**  
+   - Example: "Led a **$2M research grant** in computational biology at MIT."  
+   - Example: "CTO of a **Forbes 30 under 30 startup** in cybersecurity."  
+
+7. **High Salary Compared to Peers**  
+   - Example: "Annual salary of **$250,000**, above 90th percentile in AI research."  
+   - Example: "Earns **50% more than industry average** in machine learning."  
+
+8. **Media Coverage in Major Outlets**  
+   - Example: "Featured in **Forbes AI 50** for groundbreaking research."  
+   - Example: "Interviewed by **The New York Times** on semiconductor advances."  
+
+---  
+
+#### **Classification Rule:**  
+- **3 or fewer** criteria met → **"low"**  
+- **4 or 5** criteria met → **"medium"**  
+- **More than 5** criteria met → **"high"**  
+
+### **Output Format:**  
+Return **only one word**: `"low"`, `"medium"`, or `"high"`. Do not add explanations or extra text.  
+
+Here is the extracted candidate information:  
+{o1a_response}
+Now, classify the eligibility level.
