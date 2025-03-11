@@ -3,7 +3,27 @@
 
 This project automates **CV processing** to assess a candidate’s **O-1A visa eligibility** using **FastAPI, OCR, and LLMs (Gemini API)**. It extracts relevant information, evaluates qualifications, and provides a structured **JSON output**.  
 
+## **🔧 What You Will Need**  
+
+Before you begin, make sure you have the following:
+
+1. **Gemini API Key**  
+   - You will need a **Gemini API key** for processing. Don’t worry, the model I am using provides free usage for a certain frequency of calls, and I have already optimized the pipeline to stay within those limits.
+
+2. **FASTAPI Installation**  
+   - You need to have **FastAPI** installed on your system to run the application. If you don’t have it yet, you can install it easily using the following command:  
+   ```bash
+   pip install fastapi
+   ```
+
 ---
+
+## **⚠️ Disclaimer**
+
+This project is built on top of an existing codebase from [ResumeGPT by Aillian](https://github.com/Aillian/ResumeGPT.git). Here are the key points of customization:
+
+- I modified the original GPT-4 calls in the code and replaced them with **Gemini API calls** for enhanced processing.  
+- After extracting the information from resumes, I created a new pipeline to assess the candidate's eligibility for an O-1A visa, providing a more tailored and specific output.
 
 ## **🔹 Step-by-Step Procedure**  
 
